@@ -2,6 +2,7 @@
 #include "py/runtime.h"
 #include "samd/external_interrupts.h"
 #include "samd/pins.h"
+#include "hal/include/hal_gpio.h"
 
 
 #define SET_BIT(REG, BIT)     ((REG) |= (BIT))
