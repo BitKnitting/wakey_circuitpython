@@ -1,6 +1,7 @@
 #include "py/obj.h"
 #include "py/runtime.h"
 #include "samd/external_interrupts.h"
+#include "samd/pins.h"
 
 
 #define SET_BIT(REG, BIT)     ((REG) |= (BIT))
@@ -8,6 +9,7 @@
 #define READ_BIT(REG, BIT)    ((REG) & (BIT))
 
 STATIC mp_obj_t mymodule_deep_sleep(void) {
+  /*
   // store the original value for global interrupt enabling
   uint32_t original_PRIMASK_value;
   original_PRIMASK_value = __get_PRIMASK();
@@ -19,8 +21,30 @@ STATIC mp_obj_t mymodule_deep_sleep(void) {
   NVIC_EnableIRQ(PIN_PA19);
   // TBD: Interrupt priority level????
   __set_PRIMASK(original_PRIMASK_value);
+  */
   // Now ... EIC...rev your engine...
   turn_on_external_interrupt_controller();
+
+  // Set the PMUX pin funciton to "EIC"
+  gpio_set_pin_function(&PIN_PA19->pin, GPIO_PIN_FUNCTION_A);
+  
+  // Enable the EIC IRQ on the NVIC
+  turn_on_cpu_interrupt(&PIN_PA19->extint_channel);
+  
+  // Configure the EIC to trigger an interrupt on HIGH. I hand-rolled this vs using
+  // turn_on_eic_channel() since we're setting an extra config (WAKEUP) and are not
+  // interested in setting the channel_handler (EIC_Handler).
+  uint8_t config_index = &PIN_PA19->extint_channel / 8;
+  uint8_t position = (&PIN_PA19->extint_channel % 8) * 4;
+  uint32_t sense_setting = EIC_CONFIG_SENSE0_HIGH;
+  // The following instructions will clear any existing register bits.
+  // Use a mask if you don't want to clear them.
+  // See the SAMD21 datasheet on Sleep Mode Operation (paragraph 21.6.8, page 310);
+  // recommends to use both WAKEUPEN and INTENSET.
+  EIC->CONFIG[config_index].reg = sense_setting << position;
+  EIC->WAKEUPEN.reg = &PIN_PA19->extint_channel << EIC_WAKEUP_WAKEUPEN_Pos;
+  EIC->INTENSET.reg = &PIN_PA19->extint_channel << EIC_INTENSET_EXTINT_Pos;
+  
   // Go to sleep.
   SET_BIT(SCB->SCR,2);
   __WFI();
