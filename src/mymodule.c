@@ -47,6 +47,9 @@ STATIC mp_obj_t mymodule_deep_sleep(void) {
   EIC->CONFIG[config_index].reg = sense_setting << position;
   EIC->WAKEUP.reg = pin_PA19.extint_channel << EIC_WAKEUP_WAKEUPEN_Pos;
   EIC->INTENSET.reg = pin_PA19.extint_channel << EIC_INTENSET_EXTINT_Pos;
+  // Configure clocks.
+  REG_GCLK_CLKCTRL = GCLK_CLKCTRL_CLKEN | GCLK_CLKCTRL_GEN_GCLK0 | GCLK_CLKCTRL_ID_EIC;
+  REG_PM_APBAMASK |= PM_APBAMASK_EIC; //Enable EIC Clock
 
   // Go to sleep.
   SET_BIT(SCB->SCR,2);
