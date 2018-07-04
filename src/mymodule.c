@@ -10,46 +10,66 @@
 #define SET_BIT(REG, BIT)     ((REG) |= (BIT))
 #define CLEAR_BIT(REG, BIT)   ((REG) &= ~(BIT))
 #define READ_BIT(REG, BIT)    ((REG) & (BIT))
+void configClock(void);
+void config32kOSC(void);
 
+/* Attach peripheral clock to 32k oscillator */
+void configClock() {
+  GCLK->GENDIV.reg = GCLK_GENDIV_ID(2)|GCLK_GENDIV_DIV(4);
+  while (GCLK->STATUS.reg & GCLK_STATUS_SYNCBUSY)
+    ;
+  GCLK->GENCTRL.reg = (GCLK_GENCTRL_GENEN | GCLK_GENCTRL_SRC_XOSC32K | GCLK_GENCTRL_ID(2) | GCLK_GENCTRL_DIVSEL );
+  while (GCLK->STATUS.reg & GCLK_STATUS_SYNCBUSY)
+    ;
+  //NOTE: Changed RTC_GCLK_ID to EIC_GCLK_ID ....
+  GCLK->CLKCTRL.reg = (uint32_t)((GCLK_CLKCTRL_CLKEN | GCLK_CLKCTRL_GEN_GCLK2 | (EIC_GCLK_ID << GCLK_CLKCTRL_ID_Pos)));
+  while (GCLK->STATUS.bit.SYNCBUSY)
+    ;
+}
+
+/*
+ * Private Utility Functions
+ */
+
+/* Configure the 32768Hz Oscillator */
+void config32kOSC()
+{
+  SYSCTRL->XOSC32K.reg = SYSCTRL_XOSC32K_ONDEMAND |
+                         SYSCTRL_XOSC32K_RUNSTDBY |
+                         SYSCTRL_XOSC32K_EN32K |
+                         SYSCTRL_XOSC32K_XTALEN |
+                         SYSCTRL_XOSC32K_STARTUP(6) |
+                         SYSCTRL_XOSC32K_ENABLE;
+}
 STATIC mp_obj_t mymodule_deep_sleep(void) {
-  /*
-  // store the original value for global interrupt enabling
-  uint32_t original_PRIMASK_value;
-  original_PRIMASK_value = __get_PRIMASK();
-  // enable interrupts by setting PRIMASK to 0
-  __set_PRIMASK(0);
-  // Tell the NVIC what pin we want to get an interrupt on.
-  // Looking at circuitpython/circuitpython/ports/atmel-samd/boards/itsybitsy_m0_express/pins.c
-  // I want to use D12.  This is pin_PA19 in the mapping table.
-  NVIC_EnableIRQ(PIN_PA19);
-  // TBD: Interrupt priority level????
-  __set_PRIMASK(original_PRIMASK_value);
-  */
-  // Now ... EIC...rev your engine...
+  // This was in RTC_Zero...figured it couldn't hurt?
+  PM->APBAMASK.reg |= PM_APBAMASK_EIC; // turn on digital interface clock
+  // Pick an oscillator and turn on the RUNSTDBY bit.
+  // TBD: copy/pasted RTC_Zero..but what about the low power oscillator?
+  config32kOSC();
+  // configure the clock for the EIC....
+  configClock();
+  NVIC_EnableIRQ(PIN_PA19); // enable EIC interrupt
+  NVIC_SetPriority(PIN_PA19, 0x00);
+  // Start up the EIC.
   turn_on_external_interrupt_controller();
-
-  // Set the PMUX pin funciton to "EIC"
-  gpio_set_pin_function(PIN_PA19, GPIO_PIN_FUNCTION_A);
-
-  // Enable the EIC IRQ on the NVIC
+  // If it's good enough for Pulsein.c....
+  gpio_set_pin_function(pin_PA19.pin, GPIO_PIN_FUNCTION_A);
   turn_on_cpu_interrupt(pin_PA19.extint_channel);
-
+  // configure EIC to wake up device when CPU is in STANDBY
+  // Allow pin PA19 to wake up the CPU from sleep mode.
+  EIC->WAKEUP.reg = pin_PA19.extint_channel << EIC_WAKEUP_WAKEUPEN_Pos;
+  // INTENSET -> Enable the interrupt (in this case on pin PA19)
+  EIC->INTENSET.reg = pin_PA19.extint_channel << EIC_INTENSET_EXTINT_Pos;
+  // I copy/pasted this from sommersoft...I don't understand how to get to these
+  // values... for EIC->CONFIG....
   // Configure the EIC to trigger an interrupt on HIGH. I hand-rolled this vs using
   // turn_on_eic_channel() since we're setting an extra config (WAKEUP) and are not
   // interested in setting the channel_handler (EIC_Handler).
   uint8_t config_index = pin_PA19.extint_channel / 8;
   uint8_t position = (pin_PA19.extint_channel % 8) * 4;
   uint32_t sense_setting = EIC_CONFIG_SENSE0_HIGH;
-  // The following instructions will clear any existing register bits.
-  // Use a mask if you don't want to clear them.
-  // See the SAMD21 datasheet on Sleep Mode Operation (paragraph 21.6.8, page 310);
-  // recommends to use both WAKEUPEN and INTENSET.
   EIC->CONFIG[config_index].reg = sense_setting << position;
-  EIC->WAKEUP.reg = pin_PA19.extint_channel << EIC_WAKEUP_WAKEUPEN_Pos;
-  EIC->INTENSET.reg = pin_PA19.extint_channel << EIC_INTENSET_EXTINT_Pos;
-  // Configure clocks.
-  REG_GCLK_CLKCTRL = GCLK_CLKCTRL_CLKEN | GCLK_CLKCTRL_GEN_GCLK0 | GCLK_CLKCTRL_ID_EIC;
-  REG_PM_APBAMASK |= PM_APBAMASK_EIC; //Enable EIC Clock
 
   // Go to sleep.
   SET_BIT(SCB->SCR,2);
