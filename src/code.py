@@ -4,6 +4,7 @@ import time
 import mymodule
 led = DigitalInOut(board.D13)
 led.direction = Direction.OUTPUT
+# I assume I don't need the wakey_pin because "hard coding" pin in mymodule.
 # wakey_pin = DigitalInOut(board.D12)
 # wakey_pin.direction = Direction.INPUT
 #wakey_pin.pull = Pull.DOWN
