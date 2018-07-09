@@ -3,15 +3,14 @@ from digitalio import DigitalInOut, Direction, Pull
 import time
 import mymodule
 led = DigitalInOut(board.D13)
+
 led.direction = Direction.OUTPUT
-# I assume I don't need the wakey_pin because "hard coding" pin in mymodule.
-# wakey_pin = DigitalInOut(board.D12)
-# wakey_pin.direction = Direction.INPUT
-#wakey_pin.pull = Pull.DOWN
-# Just a start....
+interrupt_pin = DigitalInOut(board.D12)
+interrupt_pin.pull = Pull.UP
+
 led.value = True
 # Give time to delete this build if we get stuck...once in deep sleep and can't get out, we're stuck.
-time.sleep(30)
+time.sleep(20)
 led.value = False
 mymodule.deep_sleep()
 led.value = True
