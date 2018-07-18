@@ -35,8 +35,7 @@ STATIC void go_to_sleep() {
 /*************************************************************************
 */
 STATIC mp_obj_t debug_test_hello(void) {
-    int i = 5;
-    i += 1;
+
   /*
    Testing with D12 = PA19 = EXTINT 3
   */
@@ -84,8 +83,7 @@ STATIC mp_obj_t debug_test_hello(void) {
  */
  void EIC_Handler(void)
  {
-   int i = 5;
-   i += 1;
+
      // Clear the interrupt
    EIC->INTFLAG.reg = extint_mask;
  }
