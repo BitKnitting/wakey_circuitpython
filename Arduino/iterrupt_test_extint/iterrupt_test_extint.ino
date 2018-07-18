@@ -10,11 +10,9 @@ void setup() {
   Serial.begin(115200);
   while (!Serial);
   ext.begin();
-  //rtc.begin();
   pinMode(ledPin, OUTPUT);
   digitalWrite(ledPin, HIGH);
   Serial.println("Interrupt test...");
-  delay(5000);
   digitalWrite(ledPin, LOW);
   pinMode(interruptPin, INPUT_PULLUP);
   bool bAttached = ext.attachI(digitalPinToInterrupt(interruptPin),blink,LOW);
@@ -29,6 +27,8 @@ void loop() {
   Serial.println("Going to sleep.\n");
   ext.standbyMode();
   Serial.println("Woke up\n");
+  Serial.print("The interrupt pin is at ");
+  Serial.println(digitalRead(interruptPin) == 1 ? "HIGH" : "LOW");
   digitalWrite(ledPin, HIGH);
   delay(500);
   digitalWrite(ledPin, LOW);
