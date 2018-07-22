@@ -1,0 +1,43 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+CLEAR_BIT	debug_test.c	/^#define CLEAR_BIT(/;"	d	file:
+CLEAR_BIT	mymodule.c	/^#define CLEAR_BIT(/;"	d	file:
+CPU_HZ	timer_interrupt.h	/^#define CPU_HZ /;"	d
+DigitalInOut	code.py	/^from digitalio import DigitalInOut, Direction$/;"	i
+DigitalInOut	main.py	/^from digitalio import DigitalInOut, Direction$/;"	i
+Direction	code.py	/^from digitalio import DigitalInOut, Direction$/;"	i
+Direction	main.py	/^from digitalio import DigitalInOut, Direction$/;"	i
+EIC_Handler	debug_test.c	/^ void EIC_Handler(void)$/;"	f
+EIC_Handler	mymodule.c	/^ void EIC_Handler(void)$/;"	f
+LED_PIN	timer_interrupt.h	/^#define LED_PIN /;"	d
+READ_BIT	debug_test.c	/^#define READ_BIT(/;"	d	file:
+READ_BIT	mymodule.c	/^#define READ_BIT(/;"	d	file:
+SET_BIT	debug_test.c	/^#define SET_BIT(/;"	d	file:
+SET_BIT	mymodule.c	/^#define SET_BIT(/;"	d	file:
+TC3_Handler	timer_interrupt.c	/^void TC3_Handler() {$/;"	f
+TIMER_PRESCALER_DIV	timer_interrupt.h	/^#define TIMER_PRESCALER_DIV /;"	d
+board	code.py	/^import board$/;"	i
+board	main.py	/^import board$/;"	i
+debug_test	main.py	/^import debug_test$/;"	i
+debug_test_globals_table	debug_test.c	/^STATIC const mp_map_elem_t debug_test_globals_table[] = {$/;"	v
+debug_test_hello	debug_test.c	/^STATIC mp_obj_t debug_test_hello(void) {$/;"	f
+extint_mask	debug_test.c	/^STATIC uint32_t extint_mask;$/;"	v
+extint_mask	mymodule.c	/^STATIC uint32_t extint_mask;$/;"	v
+go_to_sleep	debug_test.c	/^STATIC void go_to_sleep() {$/;"	f
+go_to_sleep	mymodule.c	/^void go_to_sleep() {$/;"	f
+isLEDOn	timer_interrupt.c	/^bool isLEDOn = false;$/;"	v
+led	code.py	/^led = DigitalInOut(board.D13)$/;"	v
+led	main.py	/^led = DigitalInOut(board.D13)$/;"	v
+mp_module_debug_test	debug_test.c	/^const mp_obj_module_t mp_module_debug_test = {$/;"	v
+mp_module_mymodule	mymodule.c	/^const mp_obj_module_t mp_module_mymodule = {$/;"	v
+mymodule_deep_sleep	mymodule.c	/^STATIC mp_obj_t mymodule_deep_sleep(void) {$/;"	f
+mymodule_globals_table	mymodule.c	/^STATIC const mp_map_elem_t mymodule_globals_table[] = {$/;"	v
+on	main.py	/^    on = not on$/;"	v
+on	main.py	/^on = True$/;"	v
+setTimerFrequency	timer_interrupt.c	/^void setTimerFrequency(int frequencyHz) {$/;"	f
+startTimer	timer_interrupt.c	/^void startTimer(int frequencyHz) {$/;"	f
+time	main.py	/^import time$/;"	i
