@@ -48,5 +48,5 @@ with open(makefile_filename, 'r') as makefile:
 os.rename(makefile_filename, makefile_old_filename)
 os.rename(makefile_new_filename, makefile_filename)
 gdbinit_filename = "/Users/margaret/Documents/myLadybugHelper/wakey_circuitpython/deep_dive_samd21/Python_scripts/.gdbinit"
-gdbinit_filename_local = os.path.join(os.getcwd(),'.gbinit')
+gdbinit_filename_local = os.path.join(os.getcwd(),'.gdbinit')
 copyfile(gdbinit_filename,gdbinit_filename_local)

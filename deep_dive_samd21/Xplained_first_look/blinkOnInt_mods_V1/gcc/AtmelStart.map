@@ -792,7 +792,7 @@ LOAD /Users/margaret/arm_gcc/gcc-arm-none-eabi-7-2018-q2-update/bin/../lib/gcc/a
 LOAD /Users/margaret/arm_gcc/gcc-arm-none-eabi-7-2018-q2-update/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v6-m/crtn.o
                 0x0000000000002000                STACK_SIZE = DEFINED (STACK_SIZE)?STACK_SIZE:DEFINED (__stack_size__)?__stack_size__:0x2000
 
-.text           0x0000000000000000      0x6ec
+.text           0x0000000000000000      0x700
                 0x0000000000000000                . = ALIGN (0x4)
                 0x0000000000000000                _sfixed = .
  *(.vectors .vectors.*)
@@ -882,113 +882,115 @@ LOAD /Users/margaret/arm_gcc/gcc-arm-none-eabi-7-2018-q2-update/bin/../lib/gcc/a
  .text._gclk_init_generators_by_fref
                 0x0000000000000450       0x20 ../hpl/gclk/hpl_gclk.o
                 0x0000000000000450                _gclk_init_generators_by_fref
+ .text.zzz      0x0000000000000470       0x18 ../main.o
+                0x0000000000000470                zzz
  .text.button_pressed
-                0x0000000000000470       0x24 ../main.o
-                0x0000000000000470                button_pressed
+                0x0000000000000488       0x24 ../main.o
+                0x0000000000000488                button_pressed
  .text.gpio_init
-                0x0000000000000494       0x44 ../main.o
-                0x0000000000000494                gpio_init
+                0x00000000000004ac       0x48 ../main.o
+                0x00000000000004ac                gpio_init
  .text.startup.main
-                0x00000000000004d8       0x40 ../main.o
-                0x00000000000004d8                main
+                0x00000000000004f4       0x38 ../main.o
+                0x00000000000004f4                main
  .text.delay_driver_init
-                0x0000000000000518       0x14 ../driver_init.o
-                0x0000000000000518                delay_driver_init
+                0x000000000000052c       0x14 ../driver_init.o
+                0x000000000000052c                delay_driver_init
  .text.system_init
-                0x000000000000052c       0x44 ../driver_init.o
-                0x000000000000052c                system_init
+                0x0000000000000540       0x44 ../driver_init.o
+                0x0000000000000540                system_init
  .text.process_ext_irq
-                0x0000000000000570       0x38 ../hal/src/hal_ext_irq.o
+                0x0000000000000584       0x38 ../hal/src/hal_ext_irq.o
  .text.ext_irq_init
-                0x00000000000005a8       0x24 ../hal/src/hal_ext_irq.o
-                0x00000000000005a8                ext_irq_init
+                0x00000000000005bc       0x24 ../hal/src/hal_ext_irq.o
+                0x00000000000005bc                ext_irq_init
  .text.ext_irq_register
-                0x00000000000005cc       0x38 ../hal/src/hal_ext_irq.o
-                0x00000000000005cc                ext_irq_register
+                0x00000000000005e0       0x38 ../hal/src/hal_ext_irq.o
+                0x00000000000005e0                ext_irq_register
  .text.atmel_start_init
-                0x0000000000000604        0xc ../atmel_start.o
-                0x0000000000000604                atmel_start_init
- .text          0x0000000000000610       0x14 /Users/margaret/arm_gcc/gcc-arm-none-eabi-7-2018-q2-update/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v6-m/libgcc.a(_ffssi2.o)
-                0x0000000000000610                __ffssi2
- .text          0x0000000000000624       0x40 /Users/margaret/arm_gcc/gcc-arm-none-eabi-7-2018-q2-update/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v6-m/libgcc.a(_ctzsi2.o)
-                0x0000000000000624                __ctzsi2
+                0x0000000000000618        0xc ../atmel_start.o
+                0x0000000000000618                atmel_start_init
+ .text          0x0000000000000624       0x14 /Users/margaret/arm_gcc/gcc-arm-none-eabi-7-2018-q2-update/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v6-m/libgcc.a(_ffssi2.o)
+                0x0000000000000624                __ffssi2
+ .text          0x0000000000000638       0x40 /Users/margaret/arm_gcc/gcc-arm-none-eabi-7-2018-q2-update/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v6-m/libgcc.a(_ctzsi2.o)
+                0x0000000000000638                __ctzsi2
  .text.__libc_init_array
-                0x0000000000000664       0x48 /Users/margaret/arm_gcc/gcc-arm-none-eabi-7-2018-q2-update/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-init.o)
-                0x0000000000000664                __libc_init_array
+                0x0000000000000678       0x48 /Users/margaret/arm_gcc/gcc-arm-none-eabi-7-2018-q2-update/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-init.o)
+                0x0000000000000678                __libc_init_array
  *(.glue_7t)
- .glue_7t       0x00000000000006ac        0x0 linker stubs
+ .glue_7t       0x00000000000006c0        0x0 linker stubs
  *(.glue_7)
- .glue_7        0x00000000000006ac        0x0 linker stubs
+ .glue_7        0x00000000000006c0        0x0 linker stubs
  *(.rodata .rodata* .gnu.linkonce.r.*)
- .rodata        0x00000000000006ac        0x8 ../hpl/eic/hpl_eic.o
+ .rodata        0x00000000000006c0        0x8 ../hpl/eic/hpl_eic.o
  .rodata.str1.1
-                0x00000000000006b4       0x15 ../hpl/eic/hpl_eic.o
+                0x00000000000006c8       0x15 ../hpl/eic/hpl_eic.o
  *(.ARM.extab* .gnu.linkonce.armextab.*)
-                0x00000000000006cc                . = ALIGN (0x4)
- *fill*         0x00000000000006c9        0x3 
+                0x00000000000006e0                . = ALIGN (0x4)
+ *fill*         0x00000000000006dd        0x3 
  *(.init)
- .init          0x00000000000006cc        0x4 /Users/margaret/arm_gcc/gcc-arm-none-eabi-7-2018-q2-update/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v6-m/crti.o
-                0x00000000000006cc                _init
- .init          0x00000000000006d0        0x8 /Users/margaret/arm_gcc/gcc-arm-none-eabi-7-2018-q2-update/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v6-m/crtn.o
-                0x00000000000006d8                . = ALIGN (0x4)
-                0x00000000000006d8                __preinit_array_start = .
+ .init          0x00000000000006e0        0x4 /Users/margaret/arm_gcc/gcc-arm-none-eabi-7-2018-q2-update/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v6-m/crti.o
+                0x00000000000006e0                _init
+ .init          0x00000000000006e4        0x8 /Users/margaret/arm_gcc/gcc-arm-none-eabi-7-2018-q2-update/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v6-m/crtn.o
+                0x00000000000006ec                . = ALIGN (0x4)
+                0x00000000000006ec                __preinit_array_start = .
  *(.preinit_array)
-                0x00000000000006d8                __preinit_array_end = .
-                0x00000000000006d8                . = ALIGN (0x4)
-                0x00000000000006d8                __init_array_start = .
+                0x00000000000006ec                __preinit_array_end = .
+                0x00000000000006ec                . = ALIGN (0x4)
+                0x00000000000006ec                __init_array_start = .
  *(SORT_BY_NAME(.init_array.*))
  *(.init_array)
- .init_array    0x00000000000006d8        0x4 /Users/margaret/arm_gcc/gcc-arm-none-eabi-7-2018-q2-update/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v6-m/crtbegin.o
-                0x00000000000006dc                __init_array_end = .
-                0x00000000000006dc                . = ALIGN (0x4)
+ .init_array    0x00000000000006ec        0x4 /Users/margaret/arm_gcc/gcc-arm-none-eabi-7-2018-q2-update/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v6-m/crtbegin.o
+                0x00000000000006f0                __init_array_end = .
+                0x00000000000006f0                . = ALIGN (0x4)
  *crtbegin.o(.ctors)
  *(EXCLUDE_FILE(*crtend.o) .ctors)
  *(SORT_BY_NAME(.ctors.*))
  *crtend.o(.ctors)
-                0x00000000000006dc                . = ALIGN (0x4)
+                0x00000000000006f0                . = ALIGN (0x4)
  *(.fini)
- .fini          0x00000000000006dc        0x4 /Users/margaret/arm_gcc/gcc-arm-none-eabi-7-2018-q2-update/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v6-m/crti.o
-                0x00000000000006dc                _fini
- .fini          0x00000000000006e0        0x8 /Users/margaret/arm_gcc/gcc-arm-none-eabi-7-2018-q2-update/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v6-m/crtn.o
-                0x00000000000006e8                . = ALIGN (0x4)
-                0x00000000000006e8                __fini_array_start = .
+ .fini          0x00000000000006f0        0x4 /Users/margaret/arm_gcc/gcc-arm-none-eabi-7-2018-q2-update/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v6-m/crti.o
+                0x00000000000006f0                _fini
+ .fini          0x00000000000006f4        0x8 /Users/margaret/arm_gcc/gcc-arm-none-eabi-7-2018-q2-update/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v6-m/crtn.o
+                0x00000000000006fc                . = ALIGN (0x4)
+                0x00000000000006fc                __fini_array_start = .
  *(.fini_array)
- .fini_array    0x00000000000006e8        0x4 /Users/margaret/arm_gcc/gcc-arm-none-eabi-7-2018-q2-update/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v6-m/crtbegin.o
+ .fini_array    0x00000000000006fc        0x4 /Users/margaret/arm_gcc/gcc-arm-none-eabi-7-2018-q2-update/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v6-m/crtbegin.o
  *(SORT_BY_NAME(.fini_array.*))
-                0x00000000000006ec                __fini_array_end = .
+                0x0000000000000700                __fini_array_end = .
  *crtbegin.o(.dtors)
  *(EXCLUDE_FILE(*crtend.o) .dtors)
  *(SORT_BY_NAME(.dtors.*))
  *crtend.o(.dtors)
-                0x00000000000006ec                . = ALIGN (0x4)
-                0x00000000000006ec                _efixed = .
+                0x0000000000000700                . = ALIGN (0x4)
+                0x0000000000000700                _efixed = .
                 [!provide]                        PROVIDE (__exidx_start = .)
 
-.vfp11_veneer   0x00000000000006ec        0x0
- .vfp11_veneer  0x00000000000006ec        0x0 linker stubs
+.vfp11_veneer   0x0000000000000700        0x0
+ .vfp11_veneer  0x0000000000000700        0x0 linker stubs
 
-.v4_bx          0x00000000000006ec        0x0
- .v4_bx         0x00000000000006ec        0x0 linker stubs
+.v4_bx          0x0000000000000700        0x0
+ .v4_bx         0x0000000000000700        0x0 linker stubs
 
-.iplt           0x00000000000006ec        0x0
- .iplt          0x00000000000006ec        0x0 /Users/margaret/arm_gcc/gcc-arm-none-eabi-7-2018-q2-update/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v6-m/crtbegin.o
+.iplt           0x0000000000000700        0x0
+ .iplt          0x0000000000000700        0x0 /Users/margaret/arm_gcc/gcc-arm-none-eabi-7-2018-q2-update/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v6-m/crtbegin.o
 
-.igot.plt       0x00000000000006ec        0x0
- .igot.plt      0x00000000000006ec        0x0 /Users/margaret/arm_gcc/gcc-arm-none-eabi-7-2018-q2-update/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v6-m/crtbegin.o
+.igot.plt       0x0000000000000700        0x0
+ .igot.plt      0x0000000000000700        0x0 /Users/margaret/arm_gcc/gcc-arm-none-eabi-7-2018-q2-update/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v6-m/crtbegin.o
 
-.eh_frame       0x00000000000006ec        0x0
- .eh_frame      0x00000000000006ec        0x0 /Users/margaret/arm_gcc/gcc-arm-none-eabi-7-2018-q2-update/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v6-m/crtbegin.o
+.eh_frame       0x0000000000000700        0x0
+ .eh_frame      0x0000000000000700        0x0 /Users/margaret/arm_gcc/gcc-arm-none-eabi-7-2018-q2-update/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v6-m/crtbegin.o
 
-.rel.dyn        0x00000000000006ec        0x0
- .rel.iplt      0x00000000000006ec        0x0 /Users/margaret/arm_gcc/gcc-arm-none-eabi-7-2018-q2-update/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v6-m/crtbegin.o
+.rel.dyn        0x0000000000000700        0x0
+ .rel.iplt      0x0000000000000700        0x0 /Users/margaret/arm_gcc/gcc-arm-none-eabi-7-2018-q2-update/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v6-m/crtbegin.o
 
 .ARM.exidx
  *(.ARM.exidx* .gnu.linkonce.armexidx.*)
                 [!provide]                        PROVIDE (__exidx_end = .)
-                0x00000000000006ec                . = ALIGN (0x4)
-                0x00000000000006ec                _etext = .
+                0x0000000000000700                . = ALIGN (0x4)
+                0x0000000000000700                _etext = .
 
-.relocate       0x0000000020000000        0x0 load address 0x00000000000006ec
+.relocate       0x0000000020000000        0x0 load address 0x0000000000000700
                 0x0000000020000000                . = ALIGN (0x4)
                 0x0000000020000000                _srelocate = .
  *(.ramfunc .ramfunc.*)
@@ -1082,7 +1084,7 @@ OUTPUT(AtmelStart.elf elf32-littlearm)
  .comment       0x000000000000007f       0x80 ../hal/src/hal_ext_irq.o
  .comment       0x000000000000007f       0x80 ../atmel_start.o
 
-.debug_info     0x0000000000000000     0xa659
+.debug_info     0x0000000000000000     0xa6dc
  .debug_info    0x0000000000000000      0x21f ../hpl/systick/hpl_systick.o
  .debug_info    0x000000000000021f     0x35c7 ../samd21a/gcc/gcc/startup_samd21.o
  .debug_info    0x00000000000037e6     0x1bd3 ../hpl/eic/hpl_eic.o
@@ -1093,12 +1095,12 @@ OUTPUT(AtmelStart.elf elf32-littlearm)
  .debug_info    0x0000000000006eac       0xf2 ../hal/utils/src/utils_assert.o
  .debug_info    0x0000000000006f9e     0x1283 ../hpl/sysctrl/hpl_sysctrl.o
  .debug_info    0x0000000000008221      0x49b ../hpl/gclk/hpl_gclk.o
- .debug_info    0x00000000000086bc      0xf0c ../main.o
- .debug_info    0x00000000000095c8      0xccb ../driver_init.o
- .debug_info    0x000000000000a293      0x30f ../hal/src/hal_ext_irq.o
- .debug_info    0x000000000000a5a2       0xb7 ../atmel_start.o
+ .debug_info    0x00000000000086bc      0xf8f ../main.o
+ .debug_info    0x000000000000964b      0xccb ../driver_init.o
+ .debug_info    0x000000000000a316      0x30f ../hal/src/hal_ext_irq.o
+ .debug_info    0x000000000000a625       0xb7 ../atmel_start.o
 
-.debug_abbrev   0x0000000000000000     0x1b4d
+.debug_abbrev   0x0000000000000000     0x1b74
  .debug_abbrev  0x0000000000000000      0x15f ../hpl/systick/hpl_systick.o
  .debug_abbrev  0x000000000000015f      0x25b ../samd21a/gcc/gcc/startup_samd21.o
  .debug_abbrev  0x00000000000003ba      0x440 ../hpl/eic/hpl_eic.o
@@ -1109,12 +1111,12 @@ OUTPUT(AtmelStart.elf elf32-littlearm)
  .debug_abbrev  0x0000000000000f66       0x81 ../hal/utils/src/utils_assert.o
  .debug_abbrev  0x0000000000000fe7      0x215 ../hpl/sysctrl/hpl_sysctrl.o
  .debug_abbrev  0x00000000000011fc      0x1b5 ../hpl/gclk/hpl_gclk.o
- .debug_abbrev  0x00000000000013b1      0x308 ../main.o
- .debug_abbrev  0x00000000000016b9      0x2b6 ../driver_init.o
- .debug_abbrev  0x000000000000196f      0x160 ../hal/src/hal_ext_irq.o
- .debug_abbrev  0x0000000000001acf       0x7e ../atmel_start.o
+ .debug_abbrev  0x00000000000013b1      0x32f ../main.o
+ .debug_abbrev  0x00000000000016e0      0x2b6 ../driver_init.o
+ .debug_abbrev  0x0000000000001996      0x160 ../hal/src/hal_ext_irq.o
+ .debug_abbrev  0x0000000000001af6       0x7e ../atmel_start.o
 
-.debug_loc      0x0000000000000000      0xf97
+.debug_loc      0x0000000000000000     0x102b
  .debug_loc     0x0000000000000000       0xcb ../hpl/systick/hpl_systick.o
  .debug_loc     0x00000000000000cb       0x2b ../samd21a/gcc/gcc/startup_samd21.o
  .debug_loc     0x00000000000000f6      0x3b7 ../hpl/eic/hpl_eic.o
@@ -1124,11 +1126,11 @@ OUTPUT(AtmelStart.elf elf32-littlearm)
  .debug_loc     0x0000000000000649      0x197 ../hpl/core/hpl_core_m0plus_base.o
  .debug_loc     0x00000000000007e0       0xe8 ../hpl/sysctrl/hpl_sysctrl.o
  .debug_loc     0x00000000000008c8       0xea ../hpl/gclk/hpl_gclk.o
- .debug_loc     0x00000000000009b2      0x234 ../main.o
- .debug_loc     0x0000000000000be6      0x165 ../driver_init.o
- .debug_loc     0x0000000000000d4b      0x24c ../hal/src/hal_ext_irq.o
+ .debug_loc     0x00000000000009b2      0x2c8 ../main.o
+ .debug_loc     0x0000000000000c7a      0x165 ../driver_init.o
+ .debug_loc     0x0000000000000ddf      0x24c ../hal/src/hal_ext_irq.o
 
-.debug_aranges  0x0000000000000000      0x2e0
+.debug_aranges  0x0000000000000000      0x2e8
  .debug_aranges
                 0x0000000000000000       0x40 ../hpl/systick/hpl_systick.o
  .debug_aranges
@@ -1150,15 +1152,15 @@ OUTPUT(AtmelStart.elf elf32-littlearm)
  .debug_aranges
                 0x00000000000001e8       0x28 ../hpl/gclk/hpl_gclk.o
  .debug_aranges
-                0x0000000000000210       0x30 ../main.o
+                0x0000000000000210       0x38 ../main.o
  .debug_aranges
-                0x0000000000000240       0x30 ../driver_init.o
+                0x0000000000000248       0x30 ../driver_init.o
  .debug_aranges
-                0x0000000000000270       0x50 ../hal/src/hal_ext_irq.o
+                0x0000000000000278       0x50 ../hal/src/hal_ext_irq.o
  .debug_aranges
-                0x00000000000002c0       0x20 ../atmel_start.o
+                0x00000000000002c8       0x20 ../atmel_start.o
 
-.debug_ranges   0x0000000000000000      0x4e0
+.debug_ranges   0x0000000000000000      0x550
  .debug_ranges  0x0000000000000000       0x30 ../hpl/systick/hpl_systick.o
  .debug_ranges  0x0000000000000030       0x18 ../samd21a/gcc/gcc/startup_samd21.o
  .debug_ranges  0x0000000000000048       0xf8 ../hpl/eic/hpl_eic.o
@@ -1169,12 +1171,12 @@ OUTPUT(AtmelStart.elf elf32-littlearm)
  .debug_ranges  0x0000000000000268       0x10 ../hal/utils/src/utils_assert.o
  .debug_ranges  0x0000000000000278       0x68 ../hpl/sysctrl/hpl_sysctrl.o
  .debug_ranges  0x00000000000002e0       0x18 ../hpl/gclk/hpl_gclk.o
- .debug_ranges  0x00000000000002f8       0xf8 ../main.o
- .debug_ranges  0x00000000000003f0       0xa0 ../driver_init.o
- .debug_ranges  0x0000000000000490       0x40 ../hal/src/hal_ext_irq.o
- .debug_ranges  0x00000000000004d0       0x10 ../atmel_start.o
+ .debug_ranges  0x00000000000002f8      0x168 ../main.o
+ .debug_ranges  0x0000000000000460       0xa0 ../driver_init.o
+ .debug_ranges  0x0000000000000500       0x40 ../hal/src/hal_ext_irq.o
+ .debug_ranges  0x0000000000000540       0x10 ../atmel_start.o
 
-.debug_line     0x0000000000000000     0x1e5e
+.debug_line     0x0000000000000000     0x1e88
  .debug_line    0x0000000000000000      0x1f3 ../hpl/systick/hpl_systick.o
  .debug_line    0x00000000000001f3      0x1ff ../samd21a/gcc/gcc/startup_samd21.o
  .debug_line    0x00000000000003f2      0x3ff ../hpl/eic/hpl_eic.o
@@ -1185,10 +1187,10 @@ OUTPUT(AtmelStart.elf elf32-littlearm)
  .debug_line    0x000000000000109e      0x147 ../hal/utils/src/utils_assert.o
  .debug_line    0x00000000000011e5      0x228 ../hpl/sysctrl/hpl_sysctrl.o
  .debug_line    0x000000000000140d      0x1b4 ../hpl/gclk/hpl_gclk.o
- .debug_line    0x00000000000015c1      0x2d5 ../main.o
- .debug_line    0x0000000000001896      0x274 ../driver_init.o
- .debug_line    0x0000000000001b0a      0x20e ../hal/src/hal_ext_irq.o
- .debug_line    0x0000000000001d18      0x146 ../atmel_start.o
+ .debug_line    0x00000000000015c1      0x2ff ../main.o
+ .debug_line    0x00000000000018c0      0x274 ../driver_init.o
+ .debug_line    0x0000000000001b34      0x20e ../hal/src/hal_ext_irq.o
+ .debug_line    0x0000000000001d42      0x146 ../atmel_start.o
 
 .debug_str      0x0000000000000000     0x2fb7
  .debug_str     0x0000000000000000      0x23e ../hpl/systick/hpl_systick.o
@@ -1220,7 +1222,7 @@ OUTPUT(AtmelStart.elf elf32-littlearm)
  .debug_str     0x0000000000002fa6       0x11 ../atmel_start.o
                                         0x1eb (size before relaxing)
 
-.debug_frame    0x0000000000000000      0x540
+.debug_frame    0x0000000000000000      0x55c
  .debug_frame   0x0000000000000000       0x7c ../hpl/systick/hpl_systick.o
  .debug_frame   0x000000000000007c       0x3c ../samd21a/gcc/gcc/startup_samd21.o
  .debug_frame   0x00000000000000b8       0x8c ../hpl/eic/hpl_eic.o
@@ -1231,9 +1233,9 @@ OUTPUT(AtmelStart.elf elf32-littlearm)
  .debug_frame   0x00000000000002e8       0x20 ../hal/utils/src/utils_assert.o
  .debug_frame   0x0000000000000308       0x30 ../hpl/sysctrl/hpl_sysctrl.o
  .debug_frame   0x0000000000000338       0x30 ../hpl/gclk/hpl_gclk.o
- .debug_frame   0x0000000000000368       0x54 ../main.o
- .debug_frame   0x00000000000003bc       0x50 ../driver_init.o
- .debug_frame   0x000000000000040c       0xb8 ../hal/src/hal_ext_irq.o
- .debug_frame   0x00000000000004c4       0x28 ../atmel_start.o
- .debug_frame   0x00000000000004ec       0x28 /Users/margaret/arm_gcc/gcc-arm-none-eabi-7-2018-q2-update/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v6-m/libgcc.a(_ffssi2.o)
- .debug_frame   0x0000000000000514       0x2c /Users/margaret/arm_gcc/gcc-arm-none-eabi-7-2018-q2-update/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-init.o)
+ .debug_frame   0x0000000000000368       0x70 ../main.o
+ .debug_frame   0x00000000000003d8       0x50 ../driver_init.o
+ .debug_frame   0x0000000000000428       0xb8 ../hal/src/hal_ext_irq.o
+ .debug_frame   0x00000000000004e0       0x28 ../atmel_start.o
+ .debug_frame   0x0000000000000508       0x28 /Users/margaret/arm_gcc/gcc-arm-none-eabi-7-2018-q2-update/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v6-m/libgcc.a(_ffssi2.o)
+ .debug_frame   0x0000000000000530       0x2c /Users/margaret/arm_gcc/gcc-arm-none-eabi-7-2018-q2-update/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-init.o)
