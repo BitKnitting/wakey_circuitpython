@@ -1,3 +1,0 @@
-[submodule "circuitpython"]
-	path = circuitpython
-	url = https://github.com/BitKnitting/circuitpython.git
