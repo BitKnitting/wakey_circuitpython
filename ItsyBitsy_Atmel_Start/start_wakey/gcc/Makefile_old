@@ -65,7 +65,7 @@ hal/src/hal_sleep.o \
 atmel_start.o \
 hal/src/hal_atomic.o
 
-NEW_OBJS_AS_ARGS +=  \
+OBJS_AS_ARGS +=  \
 "hal/src/hal_io.o" \
 "samd21a/gcc/gcc/startup_samd21.o" \
 "hpl/eic/hpl_eic.o" \
@@ -93,7 +93,6 @@ NEW_OBJS_AS_ARGS +=  \
 
 # List the dependency files
 DEPS := $(OBJS:%.o=%.d)
-OBJS_AS_ARGS := $(patsubst "%","../%",$(NEW_OBJS_AS_ARGS))
 
 DEPS_AS_ARGS +=  \
 "samd21a/gcc/gcc/startup_samd21.d" \
@@ -129,8 +128,6 @@ OUTPUT_FILE_PATH_AS_ARGS +=$(OUTPUT_FILE_NAME).elf
 vpath %.c ../
 vpath %.s ../
 vpath %.S ../
-vpath % ../
-vpath %.o ../
 
 # All Target
 all: $(SUB_DIRS) $(OUTPUT_FILE_PATH)
@@ -166,28 +163,28 @@ $(OUTPUT_FILE_PATH): $(OBJS)
 %.o: %.c
 	@echo Building file: $<
 	@echo ARM/GNU C Compiler
-	$(QUOTE)arm-none-eabi-gcc$(QUOTE) -x c -mthumb -DDEBUG -Os -ffunction-sections -mlong-calls -ggdb -Wall -c -std=gnu99 \
+	$(QUOTE)arm-none-eabi-gcc$(QUOTE) -x c -mthumb -DDEBUG -Os -ffunction-sections -mlong-calls -g3 -Wall -c -std=gnu99 \
 -D__SAMD21G18A__ -mcpu=cortex-m0plus  \
 -I"../" -I"../config" -I"../examples" -I"../hal/include" -I"../hal/utils/include" -I"../hpl/core" -I"../hpl/dmac" -I"../hpl/eic" -I"../hpl/gclk" -I"../hpl/pm" -I"../hpl/port" -I"../hpl/sysctrl" -I"../hri" -I"../" -I"../CMSIS/Include" -I"../samd21a/include"  \
--MD -MP -MF "../$(@:%.o=%.d)" -MT"../$(@:%.o=%.d)" -MT"../$(@:%.o=%.o)"  -o "../$@" "$<"
+-MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"  -o "$@" "$<"
 	@echo Finished building: $<
 
 %.o: %.s
 	@echo Building file: $<
 	@echo ARM/GNU Assembler
-	$(QUOTE)arm-none-eabi-as$(QUOTE) -x c -mthumb -DDEBUG -Os -ffunction-sections -mlong-calls -ggdb -Wall -c -std=gnu99 \
+	$(QUOTE)arm-none-eabi-as$(QUOTE) -x c -mthumb -DDEBUG -Os -ffunction-sections -mlong-calls -g3 -Wall -c -std=gnu99 \
 -D__SAMD21G18A__ -mcpu=cortex-m0plus  \
 -I"../" -I"../config" -I"../examples" -I"../hal/include" -I"../hal/utils/include" -I"../hpl/core" -I"../hpl/dmac" -I"../hpl/eic" -I"../hpl/gclk" -I"../hpl/pm" -I"../hpl/port" -I"../hpl/sysctrl" -I"../hri" -I"../" -I"../CMSIS/Include" -I"../samd21a/include"  \
--MD -MP -MF "../$(@:%.o=%.d)" -MT"../$(@:%.o=%.d)" -MT"../$(@:%.o=%.o)"  -o "../$@" "$<"
+-MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"  -o "$@" "$<"
 	@echo Finished building: $<
 
 %.o: %.S
 	@echo Building file: $<
 	@echo ARM/GNU Preprocessing Assembler
-	$(QUOTE)arm-none-eabi-gcc$(QUOTE) -x c -mthumb -DDEBUG -Os -ffunction-sections -mlong-calls -ggdb -Wall -c -std=gnu99 \
+	$(QUOTE)arm-none-eabi-gcc$(QUOTE) -x c -mthumb -DDEBUG -Os -ffunction-sections -mlong-calls -g3 -Wall -c -std=gnu99 \
 -D__SAMD21G18A__ -mcpu=cortex-m0plus  \
 -I"../" -I"../config" -I"../examples" -I"../hal/include" -I"../hal/utils/include" -I"../hpl/core" -I"../hpl/dmac" -I"../hpl/eic" -I"../hpl/gclk" -I"../hpl/pm" -I"../hpl/port" -I"../hpl/sysctrl" -I"../hri" -I"../" -I"../CMSIS/Include" -I"../samd21a/include"  \
--MD -MP -MF "../$(@:%.o=%.d)" -MT"../$(@:%.o=%.d)" -MT"../$(@:%.o=%.o)"  -o "../$@" "$<"
+-MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"  -o "$@" "$<"
 	@echo Finished building: $<
 
 # Detect changes in the dependent files and recompile the respective object files.
@@ -207,15 +204,3 @@ clean:
 	rm -f $(OUTPUT_FILE_NAME).a $(OUTPUT_FILE_NAME).hex $(OUTPUT_FILE_NAME).bin \
         $(OUTPUT_FILE_NAME).lss $(OUTPUT_FILE_NAME).eep $(OUTPUT_FILE_NAME).map \
         $(OUTPUT_FILE_NAME).srec
-        
-JLINK_OPTS = -if SWD -speed 4000 -device ATSAMD21G18
-JLINK = JLinkExe $(JLINK_OPTS)
-
-#############################################################################
-# Target: flash
-# load app onto target
-#############################################################################
-flash: flash.jlink
-	$(JLINK) flash.jlink
-flash.jlink:
-	printf "loadfile /Users/margaret/Documents/myLadybugHelper/wakey_circuitpython/ItsyBitsy_Atmel_Start/start_wakey/gcc/AtmelStart.hex\nr\ng\nexit\n" > flash.jlink                
