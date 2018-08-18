@@ -1,0 +1,122 @@
+sudo: required
+dist: trusty
+language: c
+compiler:
+  - gcc
+env:
+  - TRAVIS_BOARD=feather_huzzah
+  - TRAVIS_BOARD=arduino_zero
+  - TRAVIS_BOARD=circuitplayground_express
+  - TRAVIS_BOARD=circuitplayground_express_crickit
+  - TRAVIS_BOARD=feather_m0_basic
+  - TRAVIS_BOARD=feather_m0_adalogger
+  - TRAVIS_BOARD=feather_m0_rfm69
+  - TRAVIS_BOARD=feather_m0_rfm9x
+  - TRAVIS_BOARD=feather_m0_express
+  - TRAVIS_BOARD=feather_m0_express_crickit
+  - TRAVIS_BOARD=feather_m4_express
+  - TRAVIS_BOARD=itsybitsy_m0_express
+  - TRAVIS_BOARD=itsybitsy_m4_express
+  - TRAVIS_BOARD=metro_m0_express
+  - TRAVIS_BOARD=metro_m4_express
+  - TRAVIS_BOARD=pirkey_m0
+  - TRAVIS_BOARD=trinket_m0
+  - TRAVIS_BOARD=gemma_m0
+  - TRAVIS_BOARD=feather52832
+  - TRAVIS_BOARD=pca10056
+  - TRAVIS_TEST=qemu
+  - TRAVIS_TEST=unix
+  - TRAVIS_TEST=docs
+
+addons:
+  artifacts:
+    paths:
+    - $(ls -d1 bin/*/* | tr "\n" ":")
+    target_paths: /
+
+notifications:
+  webhooks:
+    urls:
+      - https://rosie-ci.ngrok.io/travis
+    on_success: always
+    on_failure: always
+    on_start: always
+    on_cancel: always
+    on_error: always
+
+before_script:
+  - sudo dpkg --add-architecture i386
+  - |
+    sudo apt-get install -y python3 gcc-multilib pkg-config libffi-dev libffi-dev:i386 qemu-system ||
+    sleep 30 ||
+    sudo apt-get install -y python3 gcc-multilib pkg-config libffi-dev libffi-dev:i386 qemu-system
+
+  - ([[ -z "$TRAVIS_TEST" ]] || sudo apt-get install -y qemu-system)
+  - ([[ -z "$TRAVIS_BOARD" ]] || (wget https://s3.amazonaws.com/adafruit-circuit-python/gcc-arm-embedded_7-2017q4-1~trusty3_amd64.deb && sudo dpkg -i gcc-arm-embedded*_amd64.deb))
+  - ([[ $TRAVIS_TEST != "qemu" ]] || (wget https://s3.amazonaws.com/adafruit-circuit-python/gcc-arm-embedded_7-2017q4-1~trusty3_amd64.deb && sudo dpkg -i gcc-arm-embedded*_amd64.deb))
+
+  # For teensy build
+  - sudo apt-get install realpath
+  # For nrf builds
+  - ([[ $TRAVIS_BOARD != "feather52832" && $TRAVIS_BOARD != "pca10056" ]] || sudo ports/nrf/drivers/bluetooth/download_ble_stack.sh)
+  # For huzzah builds
+  - if [[ $TRAVIS_BOARD = "feather_huzzah" ]]; then wget https://github.com/jepler/esp-open-sdk/releases/download/2018-06-10/xtensa-lx106-elf-standalone.tar.gz && tar xavf xtensa-lx106-elf-standalone.tar.gz; PATH=$(readlink -f xtensa-lx106-elf/bin):$PATH; fi
+  # For coverage testing (upgrade is used to get latest urllib3 version)
+  - ([[ -z "$TRAVIS_TEST" ]] || sudo pip install --upgrade cpp-coveralls)
+  - ([[ $TRAVIS_TEST != "docs" ]] || sudo pip install Sphinx sphinx-rtd-theme recommonmark)
+  - gcc --version
+  - ([[ -z "$TRAVIS_BOARD" ]] || arm-none-eabi-gcc --version)
+  - python3 --version
+
+script:
+  # Build mpy-cross first because other builds depend on it.
+  - echo 'Building mpy-cross' && echo -en 'travis_fold:start:mpy-cross\\r'
+  - make -C mpy-cross
+  - echo -en 'travis_fold:end:mpy-cross\\r'
+
+  - echo 'Building Adafruit binaries' && echo -en 'travis_fold:start:adafruit-bins\\r'
+  - ([[ -z "$TRAVIS_BOARD" ]] || tools/build_adafruit_bins.sh)
+  - echo -en 'travis_fold:end:adafruit-bins\\r'
+
+  - echo 'Building unix' && echo -en 'travis_fold:start:unix\\r'
+  - ([[ $TRAVIS_TEST != "unix" ]] || make -C ports/unix deplibs)
+  - ([[ $TRAVIS_TEST != "unix" ]] || make -C ports/unix)
+  - ([[ $TRAVIS_TEST != "unix" ]] || make -C ports/unix coverage)
+  - echo -en 'travis_fold:end:unix\\r'
+
+  - echo 'Building qemu' && echo -en 'travis_fold:start:qemu\\r'
+  - ([[ $TRAVIS_TEST != "qemu" ]] || make -C ports/qemu-arm test)
+  - echo -en 'travis_fold:end:qemu\\r'
+
+  # run tests without coverage info
+  #- (cd tests && MICROPY_CPYTHON3=python3.4 ./run-tests -j1)
+  #- (cd tests && MICROPY_CPYTHON3=python3.4 ./run-tests -j1 --emit native)
+
+  # run tests with coverage info
+  - echo 'Test all' && echo -en 'travis_fold:start:test_all\\r'
+  - ([[ $TRAVIS_TEST != "unix" ]] || (cd tests && MICROPY_CPYTHON3=python3.4 MICROPY_MICROPYTHON=../ports/unix/micropython_coverage ./run-tests -j1))
+  - echo -en 'travis_fold:end:test_all\\r'
+
+  - echo 'Test threads' && echo -en 'travis_fold:start:test_threads\\r'
+  - ([[ $TRAVIS_TEST != "unix" ]] || (cd tests && MICROPY_CPYTHON3=python3.4 MICROPY_MICROPYTHON=../ports/unix/micropython_coverage ./run-tests -j1 -d thread))
+  - echo -en 'travis_fold:end:test_threads\\r'
+
+  - echo 'Testing with native' && echo -en 'travis_fold:start:test_native\\r'
+  - ([[ $TRAVIS_TEST != "unix" ]] || (cd tests && MICROPY_CPYTHON3=python3.4 MICROPY_MICROPYTHON=../ports/unix/micropython_coverage ./run-tests -j1 --emit native))
+  - echo -en 'travis_fold:end:test_native\\r'
+
+  - (echo 'Testing with mpy' && echo -en 'travis_fold:start:test_mpy\\r')
+  - ([[ $TRAVIS_TEST != "unix" ]] || (cd tests && MICROPY_CPYTHON3=python3.4 MICROPY_MICROPYTHON=../ports/unix/micropython_coverage ./run-tests -j1 --via-mpy -d basics float))
+  - echo -en 'travis_fold:end:test_mpy\\r'
+
+  - (echo 'Building docs' && echo -en 'travis_fold:start:build_docs\\r')
+  - ([[ $TRAVIS_TEST != "docs" ]] || sphinx-build -E -W -b html . _build/html)
+  - echo -en 'travis_fold:end:build_docs\\r'
+
+
+  # run coveralls coverage analysis (try to, even if some builds/tests failed)
+  #- (cd ports/unix && coveralls --root ../.. --build-root . --gcov $(which gcov) --gcov-options '\-o build-coverage/' --include py --include extmod)
+
+after_failure:
+  - (cd tests && for exp in *.exp; do testbase=$(basename $exp .exp); echo -e "\nFAILURE $testbase"; diff -u $testbase.exp $testbase.out; done)
+  - (grep "FAIL" ports/qemu-arm/build/console.out)
