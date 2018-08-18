@@ -1,0 +1,18 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+DigitalInOut	code.py	/^from digitalio import DigitalInOut, Direction$/;"	i
+Direction	code.py	/^from digitalio import DigitalInOut, Direction$/;"	i
+board	code.py	/^import board$/;"	i
+go_to_sleep	lowpower.c	/^STATIC void go_to_sleep() {$/;"	f
+led	code.py	/^led = DigitalInOut(board.D13)$/;"	v
+lowpower	code.py	/^import lowpower$/;"	i
+lowpower_module	lowpower.c	/^const mp_obj_module_t lowpower_module = {$/;"	v
+lowpower_module_globals_table	lowpower.c	/^STATIC const mp_map_elem_t lowpower_module_globals_table[] = {$/;"	v
+on	code.py	/^    on = not on$/;"	v
+on	code.py	/^on = True$/;"	v
+sleep	lowpower.c	/^STATIC mp_obj_t  sleep(mp_obj_t pin_in) {$/;"	f
+time	code.py	/^import time$/;"	i
