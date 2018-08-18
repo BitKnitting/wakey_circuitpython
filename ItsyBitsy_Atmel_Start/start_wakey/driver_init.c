@@ -15,8 +15,6 @@
 
 void EXTERNAL_IRQ_0_init(void)
 {
-	_gclk_enable_channel(EIC_GCLK_ID, CONF_GCLK_EIC_SRC);
-
 	// Set pin direction to input
 	gpio_set_pin_direction(WAKEY, GPIO_DIRECTION_IN);
 

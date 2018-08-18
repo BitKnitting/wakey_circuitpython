@@ -102,49 +102,23 @@ int32_t _ext_irq_init(void (*cb)(const uint32_t pin))
 	hri_eic_write_CTRL_reg(EIC, EIC_CTRL_SWRST);
 	hri_eic_wait_for_sync(EIC);
 
-	hri_eic_write_NMICTRL_reg(
-	    EIC, (CONF_EIC_NMIFILTEN << EIC_NMICTRL_NMIFILTEN_Pos) | EIC_NMICTRL_NMISENSE(CONF_EIC_NMISENSE));
-	hri_eic_write_EVCTRL_reg(EIC,
-	                         (CONF_EIC_EXTINTEO0 << 0) | (CONF_EIC_EXTINTEO1 << 1) | (CONF_EIC_EXTINTEO2 << 2)
-	                             | (CONF_EIC_EXTINTEO3 << 3) | (CONF_EIC_EXTINTEO4 << 4) | (CONF_EIC_EXTINTEO5 << 5)
-	                             | (CONF_EIC_EXTINTEO6 << 6) | (CONF_EIC_EXTINTEO7 << 7) | (CONF_EIC_EXTINTEO8 << 8)
-	                             | (CONF_EIC_EXTINTEO9 << 9) | (CONF_EIC_EXTINTEO10 << 10) | (CONF_EIC_EXTINTEO11 << 11)
-	                             | (CONF_EIC_EXTINTEO12 << 12) | (CONF_EIC_EXTINTEO13 << 13)
-	                             | (CONF_EIC_EXTINTEO14 << 14) | (CONF_EIC_EXTINTEO15 << 15) | 0);
+        /* Configure the EIC so that the SamD21 will wake up from standby
+         * when the external interrupt assigned to PA19 is triggered.
+         */
+	uint32_t extint_mask = 1 << PIN_PA19A_EIC_EXTINT_NUM;
+	EIC->WAKEUP.reg |= extint_mask;
+	/*
+	 * Set the interrupt to trigger when the level goes to HIGH.
+	 */
+	uint8_t config_index = PIN_PA19A_EIC_EXTINT_NUM / 8;
+	uint8_t position = (PIN_PA19A_EIC_EXTINT_NUM % 8) * 4;
+	EIC->CONFIG[config_index].reg &=~ (EIC_CONFIG_SENSE0_Msk << position);
+	EIC->CONFIG[config_index].reg |= EIC_CONFIG_SENSE0_HIGH_Val << position;
 
-	hri_eic_write_WAKEUP_reg(EIC,
-	                         (CONF_EIC_WAKEUPEN0 << 0) | (CONF_EIC_WAKEUPEN1 << 1) | (CONF_EIC_WAKEUPEN2 << 2)
-	                             | (CONF_EIC_WAKEUPEN3 << 3) | (CONF_EIC_WAKEUPEN4 << 4) | (CONF_EIC_WAKEUPEN5 << 5)
-	                             | (CONF_EIC_WAKEUPEN6 << 6) | (CONF_EIC_WAKEUPEN7 << 7) | (CONF_EIC_WAKEUPEN8 << 8)
-	                             | (CONF_EIC_WAKEUPEN9 << 9) | (CONF_EIC_WAKEUPEN10 << 10) | (CONF_EIC_WAKEUPEN11 << 11)
-	                             | (CONF_EIC_WAKEUPEN12 << 12) | (CONF_EIC_WAKEUPEN13 << 13)
-	                             | (CONF_EIC_WAKEUPEN14 << 14) | (CONF_EIC_WAKEUPEN15 << 15) | 0);
-	hri_eic_write_CONFIG_reg(EIC,
-	                         0,
-	                         (CONF_EIC_FILTEN0 << EIC_CONFIG_FILTEN0_Pos) | EIC_CONFIG_SENSE0(CONF_EIC_SENSE0)
-	                             | (CONF_EIC_FILTEN1 << EIC_CONFIG_FILTEN1_Pos) | EIC_CONFIG_SENSE1(CONF_EIC_SENSE1)
-	                             | (CONF_EIC_FILTEN2 << EIC_CONFIG_FILTEN2_Pos) | EIC_CONFIG_SENSE2(CONF_EIC_SENSE2)
-	                             | (CONF_EIC_FILTEN3 << EIC_CONFIG_FILTEN3_Pos) | EIC_CONFIG_SENSE3(CONF_EIC_SENSE3)
-	                             | (CONF_EIC_FILTEN4 << EIC_CONFIG_FILTEN4_Pos) | EIC_CONFIG_SENSE4(CONF_EIC_SENSE4)
-	                             | (CONF_EIC_FILTEN5 << EIC_CONFIG_FILTEN5_Pos) | EIC_CONFIG_SENSE5(CONF_EIC_SENSE5)
-	                             | (CONF_EIC_FILTEN6 << EIC_CONFIG_FILTEN6_Pos) | EIC_CONFIG_SENSE6(CONF_EIC_SENSE6)
-	                             | (CONF_EIC_FILTEN7 << EIC_CONFIG_FILTEN7_Pos) | EIC_CONFIG_SENSE7(CONF_EIC_SENSE7)
-	                             | 0);
-
-	hri_eic_write_CONFIG_reg(EIC,
-	                         1,
-	                         (CONF_EIC_FILTEN8 << EIC_CONFIG_FILTEN0_Pos) | EIC_CONFIG_SENSE0(CONF_EIC_SENSE8)
-	                             | (CONF_EIC_FILTEN9 << EIC_CONFIG_FILTEN1_Pos) | EIC_CONFIG_SENSE1(CONF_EIC_SENSE9)
-	                             | (CONF_EIC_FILTEN10 << EIC_CONFIG_FILTEN2_Pos) | EIC_CONFIG_SENSE2(CONF_EIC_SENSE10)
-	                             | (CONF_EIC_FILTEN11 << EIC_CONFIG_FILTEN3_Pos) | EIC_CONFIG_SENSE3(CONF_EIC_SENSE11)
-	                             | (CONF_EIC_FILTEN12 << EIC_CONFIG_FILTEN4_Pos) | EIC_CONFIG_SENSE4(CONF_EIC_SENSE12)
-	                             | (CONF_EIC_FILTEN13 << EIC_CONFIG_FILTEN5_Pos) | EIC_CONFIG_SENSE5(CONF_EIC_SENSE13)
-	                             | (CONF_EIC_FILTEN14 << EIC_CONFIG_FILTEN6_Pos) | EIC_CONFIG_SENSE6(CONF_EIC_SENSE14)
-	                             | (CONF_EIC_FILTEN15 << EIC_CONFIG_FILTEN7_Pos) | EIC_CONFIG_SENSE7(CONF_EIC_SENSE15)
-	                             | 0);
 
 	hri_eic_set_CTRL_ENABLE_bit(EIC);
-
+	/* Let the NVIC know the EIC will be communicating with it
+	 */
 	NVIC_DisableIRQ(EIC_IRQn);
 	NVIC_ClearPendingIRQ(EIC_IRQn);
 	NVIC_EnableIRQ(EIC_IRQn);
