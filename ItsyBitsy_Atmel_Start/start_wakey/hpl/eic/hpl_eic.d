@@ -1,14 +1,14 @@
 ../hpl/eic/hpl_eic.d ../hpl/eic/hpl_eic.o: ../hpl/eic/hpl_eic.c \
  ../hal/utils/include/compiler.h \
- /Users/margaret/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/lib/gcc/arm-none-eabi/7.3.1/include/stddef.h \
- /Users/margaret/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/lib/gcc/arm-none-eabi/7.3.1/include/stdint.h \
- /Users/margaret/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/arm-none-eabi/include/stdint.h \
- /Users/margaret/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/arm-none-eabi/include/machine/_default_types.h \
- /Users/margaret/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/arm-none-eabi/include/sys/features.h \
- /Users/margaret/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/arm-none-eabi/include/_newlib_version.h \
- /Users/margaret/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/arm-none-eabi/include/sys/_intsup.h \
- /Users/margaret/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/arm-none-eabi/include/sys/_stdint.h \
- /Users/margaret/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/lib/gcc/arm-none-eabi/7.3.1/include/stdbool.h \
+ /Users/margaret/arm_gcc/gcc-arm-none-eabi-7-2018-q2-update/lib/gcc/arm-none-eabi/7.3.1/include/stddef.h \
+ /Users/margaret/arm_gcc/gcc-arm-none-eabi-7-2018-q2-update/lib/gcc/arm-none-eabi/7.3.1/include/stdint.h \
+ /Users/margaret/arm_gcc/gcc-arm-none-eabi-7-2018-q2-update/arm-none-eabi/include/stdint.h \
+ /Users/margaret/arm_gcc/gcc-arm-none-eabi-7-2018-q2-update/arm-none-eabi/include/machine/_default_types.h \
+ /Users/margaret/arm_gcc/gcc-arm-none-eabi-7-2018-q2-update/arm-none-eabi/include/sys/features.h \
+ /Users/margaret/arm_gcc/gcc-arm-none-eabi-7-2018-q2-update/arm-none-eabi/include/_newlib_version.h \
+ /Users/margaret/arm_gcc/gcc-arm-none-eabi-7-2018-q2-update/arm-none-eabi/include/sys/_intsup.h \
+ /Users/margaret/arm_gcc/gcc-arm-none-eabi-7-2018-q2-update/arm-none-eabi/include/sys/_stdint.h \
+ /Users/margaret/arm_gcc/gcc-arm-none-eabi-7-2018-q2-update/lib/gcc/arm-none-eabi/7.3.1/include/stdbool.h \
  ../hal/utils/include/parts.h ../samd21a/include/samd21.h \
  ../samd21a/include/samd21g18a.h ../CMSIS/Include/core_cm0plus.h \
  ../CMSIS/Include/cmsis_compiler.h ../CMSIS/Include/cmsis_gcc.h \
@@ -58,41 +58,41 @@
  ../hri/hri_usb_d21.h ../hri/hri_wdt_d21.h \
  ../hal/utils/include/err_codes.h ../config/hpl_eic_config.h \
  ../hal/include/hpl_ext_irq.h \
- /Users/margaret/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/arm-none-eabi/include/string.h \
- /Users/margaret/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/arm-none-eabi/include/_ansi.h \
- /Users/margaret/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/arm-none-eabi/include/newlib.h \
- /Users/margaret/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/arm-none-eabi/include/sys/config.h \
- /Users/margaret/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/arm-none-eabi/include/machine/ieeefp.h \
- /Users/margaret/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/arm-none-eabi/include/sys/reent.h \
- /Users/margaret/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/arm-none-eabi/include/_ansi.h \
- /Users/margaret/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/arm-none-eabi/include/sys/_types.h \
- /Users/margaret/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/arm-none-eabi/include/machine/_types.h \
- /Users/margaret/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/arm-none-eabi/include/sys/lock.h \
- /Users/margaret/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/arm-none-eabi/include/sys/cdefs.h \
- /Users/margaret/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/arm-none-eabi/include/xlocale.h \
- /Users/margaret/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/arm-none-eabi/include/strings.h \
- /Users/margaret/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/arm-none-eabi/include/sys/string.h \
+ /Users/margaret/arm_gcc/gcc-arm-none-eabi-7-2018-q2-update/arm-none-eabi/include/string.h \
+ /Users/margaret/arm_gcc/gcc-arm-none-eabi-7-2018-q2-update/arm-none-eabi/include/_ansi.h \
+ /Users/margaret/arm_gcc/gcc-arm-none-eabi-7-2018-q2-update/arm-none-eabi/include/newlib.h \
+ /Users/margaret/arm_gcc/gcc-arm-none-eabi-7-2018-q2-update/arm-none-eabi/include/sys/config.h \
+ /Users/margaret/arm_gcc/gcc-arm-none-eabi-7-2018-q2-update/arm-none-eabi/include/machine/ieeefp.h \
+ /Users/margaret/arm_gcc/gcc-arm-none-eabi-7-2018-q2-update/arm-none-eabi/include/sys/reent.h \
+ /Users/margaret/arm_gcc/gcc-arm-none-eabi-7-2018-q2-update/arm-none-eabi/include/_ansi.h \
+ /Users/margaret/arm_gcc/gcc-arm-none-eabi-7-2018-q2-update/arm-none-eabi/include/sys/_types.h \
+ /Users/margaret/arm_gcc/gcc-arm-none-eabi-7-2018-q2-update/arm-none-eabi/include/machine/_types.h \
+ /Users/margaret/arm_gcc/gcc-arm-none-eabi-7-2018-q2-update/arm-none-eabi/include/sys/lock.h \
+ /Users/margaret/arm_gcc/gcc-arm-none-eabi-7-2018-q2-update/arm-none-eabi/include/sys/cdefs.h \
+ /Users/margaret/arm_gcc/gcc-arm-none-eabi-7-2018-q2-update/arm-none-eabi/include/xlocale.h \
+ /Users/margaret/arm_gcc/gcc-arm-none-eabi-7-2018-q2-update/arm-none-eabi/include/strings.h \
+ /Users/margaret/arm_gcc/gcc-arm-none-eabi-7-2018-q2-update/arm-none-eabi/include/sys/string.h \
  ../hal/utils/include/utils.h ../hal/utils/include/utils_assert.h
 
 ../hal/utils/include/compiler.h:
 
-/Users/margaret/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/lib/gcc/arm-none-eabi/7.3.1/include/stddef.h:
+/Users/margaret/arm_gcc/gcc-arm-none-eabi-7-2018-q2-update/lib/gcc/arm-none-eabi/7.3.1/include/stddef.h:
 
-/Users/margaret/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/lib/gcc/arm-none-eabi/7.3.1/include/stdint.h:
+/Users/margaret/arm_gcc/gcc-arm-none-eabi-7-2018-q2-update/lib/gcc/arm-none-eabi/7.3.1/include/stdint.h:
 
-/Users/margaret/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/arm-none-eabi/include/stdint.h:
+/Users/margaret/arm_gcc/gcc-arm-none-eabi-7-2018-q2-update/arm-none-eabi/include/stdint.h:
 
-/Users/margaret/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/arm-none-eabi/include/machine/_default_types.h:
+/Users/margaret/arm_gcc/gcc-arm-none-eabi-7-2018-q2-update/arm-none-eabi/include/machine/_default_types.h:
 
-/Users/margaret/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/arm-none-eabi/include/sys/features.h:
+/Users/margaret/arm_gcc/gcc-arm-none-eabi-7-2018-q2-update/arm-none-eabi/include/sys/features.h:
 
-/Users/margaret/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/arm-none-eabi/include/_newlib_version.h:
+/Users/margaret/arm_gcc/gcc-arm-none-eabi-7-2018-q2-update/arm-none-eabi/include/_newlib_version.h:
 
-/Users/margaret/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/arm-none-eabi/include/sys/_intsup.h:
+/Users/margaret/arm_gcc/gcc-arm-none-eabi-7-2018-q2-update/arm-none-eabi/include/sys/_intsup.h:
 
-/Users/margaret/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/arm-none-eabi/include/sys/_stdint.h:
+/Users/margaret/arm_gcc/gcc-arm-none-eabi-7-2018-q2-update/arm-none-eabi/include/sys/_stdint.h:
 
-/Users/margaret/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/lib/gcc/arm-none-eabi/7.3.1/include/stdbool.h:
+/Users/margaret/arm_gcc/gcc-arm-none-eabi-7-2018-q2-update/lib/gcc/arm-none-eabi/7.3.1/include/stdbool.h:
 
 ../hal/utils/include/parts.h:
 
@@ -284,33 +284,33 @@
 
 ../hal/include/hpl_ext_irq.h:
 
-/Users/margaret/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/arm-none-eabi/include/string.h:
+/Users/margaret/arm_gcc/gcc-arm-none-eabi-7-2018-q2-update/arm-none-eabi/include/string.h:
 
-/Users/margaret/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/arm-none-eabi/include/_ansi.h:
+/Users/margaret/arm_gcc/gcc-arm-none-eabi-7-2018-q2-update/arm-none-eabi/include/_ansi.h:
 
-/Users/margaret/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/arm-none-eabi/include/newlib.h:
+/Users/margaret/arm_gcc/gcc-arm-none-eabi-7-2018-q2-update/arm-none-eabi/include/newlib.h:
 
-/Users/margaret/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/arm-none-eabi/include/sys/config.h:
+/Users/margaret/arm_gcc/gcc-arm-none-eabi-7-2018-q2-update/arm-none-eabi/include/sys/config.h:
 
-/Users/margaret/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/arm-none-eabi/include/machine/ieeefp.h:
+/Users/margaret/arm_gcc/gcc-arm-none-eabi-7-2018-q2-update/arm-none-eabi/include/machine/ieeefp.h:
 
-/Users/margaret/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/arm-none-eabi/include/sys/reent.h:
+/Users/margaret/arm_gcc/gcc-arm-none-eabi-7-2018-q2-update/arm-none-eabi/include/sys/reent.h:
 
-/Users/margaret/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/arm-none-eabi/include/_ansi.h:
+/Users/margaret/arm_gcc/gcc-arm-none-eabi-7-2018-q2-update/arm-none-eabi/include/_ansi.h:
 
-/Users/margaret/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/arm-none-eabi/include/sys/_types.h:
+/Users/margaret/arm_gcc/gcc-arm-none-eabi-7-2018-q2-update/arm-none-eabi/include/sys/_types.h:
 
-/Users/margaret/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/arm-none-eabi/include/machine/_types.h:
+/Users/margaret/arm_gcc/gcc-arm-none-eabi-7-2018-q2-update/arm-none-eabi/include/machine/_types.h:
 
-/Users/margaret/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/arm-none-eabi/include/sys/lock.h:
+/Users/margaret/arm_gcc/gcc-arm-none-eabi-7-2018-q2-update/arm-none-eabi/include/sys/lock.h:
 
-/Users/margaret/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/arm-none-eabi/include/sys/cdefs.h:
+/Users/margaret/arm_gcc/gcc-arm-none-eabi-7-2018-q2-update/arm-none-eabi/include/sys/cdefs.h:
 
-/Users/margaret/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/arm-none-eabi/include/xlocale.h:
+/Users/margaret/arm_gcc/gcc-arm-none-eabi-7-2018-q2-update/arm-none-eabi/include/xlocale.h:
 
-/Users/margaret/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/arm-none-eabi/include/strings.h:
+/Users/margaret/arm_gcc/gcc-arm-none-eabi-7-2018-q2-update/arm-none-eabi/include/strings.h:
 
-/Users/margaret/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/arm-none-eabi/include/sys/string.h:
+/Users/margaret/arm_gcc/gcc-arm-none-eabi-7-2018-q2-update/arm-none-eabi/include/sys/string.h:
 
 ../hal/utils/include/utils.h:
 
