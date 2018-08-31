@@ -12,10 +12,8 @@
 #pragma GCC push_options
 #pragma GCC optimize ("O0")
 
-uint8_t pin;
-void config_EIC(uint8_t p, uint8_t channel)
+void config_EIC(uint8_t pin, uint8_t channel)
 {
-  pin = p;
   // Configure the GPIO
   gpio_set_pin_direction(pin, GPIO_DIRECTION_IN);
   gpio_set_pin_pull_mode(pin,GPIO_PULL_DOWN);
@@ -44,8 +42,7 @@ void config_EIC(uint8_t p, uint8_t channel)
   // ALSO - turn_on_eic_channel() calls turn_on_cpu_interrupt().  This function lets NVIC know to keep
   // an eye out for traffic coming in from the EIC.
 
-  // Enable the Interrupt.
-  hri_eic_set_INTEN_reg(EIC, extint_mask);
+
 
   // Associate the clock with the EIC and set the CTRL bit to Enable.
   turn_on_external_interrupt_controller();
@@ -59,8 +56,7 @@ void time_to_sleep(void){
 }
 // Callback
 void wakey_interrupt_handler(uint8_t channel) {
-  volatile uint32_t flags = hri_eic_read_INTFLAG_reg(EIC) & hri_eic_read_INTEN_reg(EIC);
-  hri_eic_clear_INTFLAG_reg(EIC, flags);
-  turn_off_eic_channel(channel);
+
+  eic_channel_free(channel);
 }
 #pragma GCC pop_options

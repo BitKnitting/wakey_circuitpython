@@ -42,7 +42,8 @@
 #include "supervisor/shared/translate.h"
 
 #include "tick.h"
-
+#pragma GCC push_options
+#pragma GCC optimize ("O0")
 static void pulsein_set_config(pulseio_pulsein_obj_t* self, bool first_edge) {
     uint32_t sense_setting;
     if (!first_edge) {
@@ -238,3 +239,4 @@ uint16_t common_hal_pulseio_pulsein_get_item(pulseio_pulsein_obj_t* self,
     common_hal_mcu_enable_interrupts();
     return value;
 }
+#pragma GCC pop_options
